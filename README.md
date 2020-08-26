@@ -17,6 +17,8 @@ Completely in-memory execution
 
 Better parsing of memory for username/password
 
+Search for mstsc.exe processes and inject into them automatically.
+
 ## References
 RDPThief: https://github.com/0x09AL/RdpThief
 
