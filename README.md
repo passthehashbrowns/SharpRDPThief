@@ -7,17 +7,12 @@ You can read more about the original research from @0x09AL here: https://www.mds
 
 ![Proof of concept screenshot](https://pbs.twimg.com/media/EgUZZQVXYAEGMAw?format=png&name=large)
 
-## Usage
-SharpRDPThief.exe [mstsc.exe PID]
-
-SharpRDPThief.exe C:\Windows\System32\mstsc.exe
-
 ## TODO
 Completely in-memory execution
 
 Better parsing of memory for username/password
 
-Search for mstsc.exe processes and inject into them automatically.
+[Done] ~~Search for mstsc.exe processes and inject into them automatically.~~
 
 ## References
 RDPThief: https://github.com/0x09AL/RdpThief
