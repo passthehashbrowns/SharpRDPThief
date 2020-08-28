@@ -25,12 +25,12 @@ C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\EasyLoad64.dll
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\SharpRDPThief.exe.config
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\SharpRDPThief.exe
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\SharpRDPThief.pdb
-C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\EasyHook.dll
-C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\RDPHook.dll
-C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\RDPHook.pdb
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\EasyHook.xml
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\obj\Debug\SharpRDPThief.csprojAssemblyReference.cache
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\obj\Debug\SharpRDPThief.csproj.CoreCompileInputs.cache
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\obj\Debug\SharpRDPThief.csproj.CopyComplete
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\obj\Debug\SharpRDPThief.exe
 C:\Users\pcuser\SharpRDPThief\SharpRDPThief\obj\Debug\SharpRDPThief.pdb
+C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\RDPHook.dll
+C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\RDPHook.pdb
+C:\Users\pcuser\SharpRDPThief\SharpRDPThief\bin\Debug\EasyHook.dll
